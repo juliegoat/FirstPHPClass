@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Add Valentine</title>
+</head>
+<body>
+<form>
+    <p>
+        <label for="sender">Sender:</label>
+        <input type="text" name="sender" id="sender">
+    </p>
+    <p>
+        <label for="recipient">Recipient:</label>
+        <input type="text" name="recipient" id="recipient">
+    </p>
+    <p>
+        <label for="joke">joke:</label>
+        <input type="text" name="joke" id="joke">
+    </p>
+    <input type="submit" value="Submit" onclick="addtoDB()">
+</form>
+<p id="submitted"></p>
+<script>
+function addtoDB() {
+  var xhttp; 
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+        document.getElementById("submitted").innerHTML = "form submitted";
+    }
+  };
+  var sender = document.getElementById('sender').value;
+   var recipient = document.getElementById('recipient').value;
+   var joke = document.getElementById('joke').value;
+   var queryString = "?sender=" + sender + "&recipient=" + recipient + "&joke=" + joke;
+   console.log(queryString);
+   xhttp.open("GET", "AddValentine.php" + queryString, true);
+   xhttp.send(null); 
+
+}
+</script>
+</body>
+</html>
